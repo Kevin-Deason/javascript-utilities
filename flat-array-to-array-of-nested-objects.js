@@ -12,7 +12,6 @@ const flatArrayToNested = (function () {
 
     function _getChildItems(inArray, currentItem) {
         let items = inArray.filter(x => x[_store.groupingField] === currentItem[_store.parentField] && x[_store.groupingField] !== x[_store.parentField]);
-
         _pushDistinct(_store.processed, currentItem[_store.parentField]);
 
         if (items.length === 0) {
@@ -39,7 +38,7 @@ const flatArrayToNested = (function () {
 
         let remove = _store.endResult
             .filter(value => _store.processed.includes(value[_store.groupingField]) && !(value[_store.groupingField] === value[_store.parentField]));
-        
+
         for (let i = 0; i < remove.length; i++) {
             let currentItem = remove[i];
             let idx = _store.endResult.indexOf(currentItem);
@@ -60,4 +59,3 @@ const flatArrayToNested = (function () {
 module.exports = {
     array: flatArrayToNested
 };
-
